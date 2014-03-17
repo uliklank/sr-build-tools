@@ -1,0 +1,4 @@
+jenkins_user: 'jenkins'
+jenkins_user_comment: 'Jenkins Slave User'
+jenkins_user_email: "{{jenkins_user}}@example.com"
+jenkins_url: jenkins:8080
