@@ -33,7 +33,6 @@
   vars:
     ros_release: 'hydro'
     jenkins_user: 'jenkins'
-    jenkins_user_comment: 'Jenkins Slave User'
     jenkins_user_email: 'software@shadowrobot.com'
     jenkins_url: jenkins:8080
     sr_build_tools_dir: "/opt/shadow/sr-build-tools"

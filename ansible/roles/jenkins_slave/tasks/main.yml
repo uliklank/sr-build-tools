@@ -1,2 +1,18 @@
-- name: Hello
-  debug: msg=Hello
+# Install packages a jenkins user will need
+- name: Install packages
+  apt: name={{item}}
+  with_items:
+    - ntp
+    - acpid
+    - git
+    - ssh
+    - openjdk-6-jre # to run the jenkins slave agent
+    - python-yaml
+
+- name: Add {{jenkins_user}} user
+  user: name={{jenkins_user}}
+    comment="{{jenkins_user_comment}}"
+    append=yes groups=adm,sudo,plugdev,cdrom
+
+- name: Give user passwordless sudo
+  lineinfile: "dest=/etc/sudoers state=present regexp='^{{jenkins_user}}' line='{{jenkins_user}}  ALL=(ALL) NOPASSWD:  ALL' insertafter=EOF"
