@@ -16,3 +16,10 @@
 
 - name: Give user passwordless sudo
   lineinfile: "dest=/etc/sudoers state=present regexp='^{{jenkins_user}}' line='{{jenkins_user}}  ALL=(ALL) NOPASSWD:  ALL' insertafter=EOF"
+
+- name: Test for server pub key
+  command: 'wget -O /tmp/ansible_jenkins_server_key "{{jenkins_server_pubkey}}"'
+
+- name: Debug content
+  debug: msg="File={{ lookup('pipe', 'cat /tmp/ansible_jenkins_server_key') }}"
+

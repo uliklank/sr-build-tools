@@ -2,3 +2,8 @@ jenkins_user: 'jenkins'
 jenkins_user_comment: 'Jenkins Slave User'
 jenkins_user_email: "{{jenkins_user}}@example.com"
 jenkins_url: jenkins:8080
+# We use a (passwordless) ssh key setup for the server to login with.
+# This tells us where we can wget the pub key to setup authorized_keys
+jenkins_server_pubkey: "http://{{jenkins_url}}/userContent/id_rsa.pub"
+# Use needs the private key to login into github
+jenkins_server_privatekey: "http://{{jenkins_url}}/userContent/id_rsa"
