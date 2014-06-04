@@ -1,0 +1,56 @@
+# Install packages
+- name: Install packages
+  apt: name={{item}}
+  with_items:
+    - git
+    - vim
+    - tree
+    - htop
+    - terminator
+    - xtail
+    - ack-grep
+    - wajig
+    - ccze
+    - idle
+
+- name: Add ros group
+  group: name=ros
+
+- name: Add user
+  user: name=mda
+    comment="Mark Pitchless"
+    shell=/bin/bash
+    append=yes
+    groups=ros,adm,sudo,plugdev,cdrom
+
+- name: Test for profile
+  stat: path=~mda/.git
+  register: dot_git
+
+- name: Check out profile
+  git: repo=git@github.com:markpitchless/home.git
+    dest=/tmp/mda
+    accept_hostkey=yes
+  sudo: yes
+  when: dot_git.stat.exists == false
+
+- name: Fix profile perms
+  file: path=/tmp/mda recurse=yes owner=mda group=mda
+  when: dot_git.stat.exists == false
+
+- name: Install profile
+  command: cp -a /tmp/mda /home
+  sudo: yes
+  sudo_user: mda
+  when: dot_git.stat.exists == false
+
+- name: Cleanup
+  command: rm -rf /tmp/mda
+  when: dot_git.stat.exists == false
+
+- name: Get pub key
+  command: cat ~mda/.ssh/id_rsa.pub
+  register: pub_key
+
+- name: Add pub key
+  authorized_key: user=mda key="{{ pub_key.stdout }}"
