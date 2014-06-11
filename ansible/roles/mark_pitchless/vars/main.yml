@@ -1,0 +1,15 @@
+mark_pitchless:
+  user: mda
+  comment: "Mark Pitchless"
+  packages:
+    - git
+    - vim
+    - tree
+    - htop
+    - terminator
+    - xtail
+    - ack-grep
+    - wajig
+    - ccze
+    - idle
+    - fonts-droid

@@ -1,56 +1,49 @@
 # Install packages
 - name: Install packages
   apt: name={{item}}
-  with_items:
-    - git
-    - vim
-    - tree
-    - htop
-    - terminator
-    - xtail
-    - ack-grep
-    - wajig
-    - ccze
-    - idle
+  with_items: mark_pitchless.packages
 
 - name: Add ros group
   group: name=ros
 
 - name: Add user
-  user: name=mda
-    comment="Mark Pitchless"
+  user: name={{ mark_pitchless.user }}
+    comment="{{ mark_pitchless.comment }}"
     shell=/bin/bash
     append=yes
     groups=ros,adm,sudo,plugdev,cdrom
 
 - name: Test for profile
-  stat: path=~mda/.git
+  stat: path=~{{ mark_pitchless.user }}/.git
   register: dot_git
 
 - name: Check out profile
   git: repo=https://github.com/markpitchless/home.git
-    dest=/tmp/mda
+    dest=/tmp/{{ mark_pitchless.user }}
     accept_hostkey=yes
   sudo: yes
   when: dot_git.stat.exists == false
 
 - name: Fix profile perms
-  file: path=/tmp/mda recurse=yes owner=mda group=mda
+  file: path=/tmp/{{ mark_pitchless.user }}
+    recurse=yes
+    owner={{ mark_pitchless.user }}
+    group={{ mark_pitchless.user }}
   when: dot_git.stat.exists == false
 
 - name: Install profile
-  command: cp -a /tmp/mda /home
+  command: cp -a /tmp/{{ mark_pitchless.user }} /home
   sudo: yes
-  sudo_user: mda
+  sudo_user: "{{ mark_pitchless.user }}"
   when: dot_git.stat.exists == false
 
 - name: Cleanup
-  command: rm -rf /tmp/mda
+  command: rm -rf /tmp/{{ mark_pitchless.user }}
   when: dot_git.stat.exists == false
 
 - name: Get pub key
-  command: cat ~mda/.ssh/id_rsa.pub
+  command: cat ~{{ mark_pitchless.user }}/.ssh/id_rsa.pub
   register: pub_key
 
 - name: Add pub key
-  authorized_key: user=mda key="{{ pub_key.stdout }}"
+  authorized_key: user={{ mark_pitchless.user }} key="{{ pub_key.stdout }}"
