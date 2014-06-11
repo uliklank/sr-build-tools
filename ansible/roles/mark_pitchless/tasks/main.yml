@@ -28,7 +28,7 @@
   register: dot_git
 
 - name: Check out profile
-  git: repo=git@github.com:markpitchless/home.git
+  git: repo=https://github.com/markpitchless/home.git
     dest=/tmp/mda
     accept_hostkey=yes
   sudo: yes
