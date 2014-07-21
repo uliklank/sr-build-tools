@@ -42,7 +42,7 @@
   when: dot_git.stat.exists == false
 
 - name: Get pub key
-  command: cat ~{{ mark_pitchless.user }}/.ssh/id_rsa.pub
+  shell: cat ~{{ mark_pitchless.user }}/.ssh/id_rsa.pub
   register: pub_key
 
 - name: Add pub key
