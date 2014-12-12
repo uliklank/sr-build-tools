@@ -104,16 +104,19 @@
 - hosts: hand-indigo-dev
   vars:
     ros_release: 'indigo'
+    ros_gazebo_version: 4
     ros_user: 'hand'
     ros_user_comment: 'Shadow Hand'
     ros_user_password: "hand"
     ros_user_email: 'software@shadowrobot.com'
     ros_workspace_install: "../data/shadow_robot-{{ros_release}}.rosinstall"
+    ros_workspace_dep_skip_keys: gazebo
     ros_user_background: "files/images/ShadowRobot-smaller.jpg_1280x1280.jpg"
     monospace_font: "Ubuntu Mono 11"
   sudo: yes
   roles:
     - ros_install
+    - ros_gazebo
     - ros_user
     - ros_workspace
     - share_folder

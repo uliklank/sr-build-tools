@@ -1,0 +1,21 @@
+---
+# http://gazebosim.org/tutorials/?tut=ros_wrapper_versions
+
+- name: Add the OSRF repo key
+  apt_key: url=http://packages.osrfoundation.org/gazebo.key
+
+- name: Add OSRF repo
+  copy: dest=/etc/apt/sources.list.d/ros-osrf.list
+        content="deb http://packages.osrfoundation.org/gazebo/ubuntu {{ansible_distribution_release}} main"
+        owner=root group=root mode=644
+
+- name: Update package lists
+  apt: update_cache=yes
+
+- name: Install Gazebo
+  apt: name={{item}} force=yes
+  with_items:
+    - "ros-{{ ros_release }}-gazebo{{ ros_gazebo_version }}-ros-pkgs"
+    - "ros-{{ ros_release }}-gazebo{{ ros_gazebo_version }}-ros-control"
+    - gazebo4-doc
+
