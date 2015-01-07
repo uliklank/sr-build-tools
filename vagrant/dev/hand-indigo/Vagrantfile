@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 hostname        = "hand-indigo-dev"
-memory          = ENV['VAGRANT_MEMORY']  || '2048'
-cores           = ENV['VAGRANT_CORES']   || '2'
+memory          = ENV['VAGRANT_MEMORY']  || '4096'
+cores           = ENV['VAGRANT_CORES']   || '4'
 vram            = ENV['VAGRANT_VRAM']    || '128'
 ansible_verbose = ENV['ANSIBLE_VERBOSE'] || "vv"
 
