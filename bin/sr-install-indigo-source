@@ -47,6 +47,9 @@ echo ROS UBUNTU installed sucessfully
     cd ~/workspace
     catkin_make
 
+    # install grant
+    sudo cp ~/workspace/devel/lib/ros_grant/ros_grant /usr/local/bin/
+    sudo chmod +s /usr/local/bin/ros_grant
 
 echo Shadow Software installed sucessfully
 
