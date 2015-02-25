@@ -28,6 +28,7 @@
 
 - name: Set users password
   shell: "echo '{{ros_user}}:{{ros_user_password}}' | chpasswd"
+  when: "{{ros_user_password}}" != ""
 
 - name: Give user passwordless sudo.
   lineinfile: "dest=/etc/sudoers state=present regexp='^{{ros_user}}' line='{{ros_user}}  ALL=(ALL) NOPASSWD:  ALL' insertafter=EOF"
