@@ -1,3 +1,3 @@
 ---
 dependencies:
-  - { role: ci/servers/circle/init }
+  - { role: ci/servers/common/init }
