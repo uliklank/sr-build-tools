@@ -1,0 +1,38 @@
+---
+# Playbook for common CI init specific code
+
+- name: Set ros_workspace
+  set_fact:
+    ros_workspace: "{{server_ros_workspace|default(ansible_env.HOME'/workspace')}}"
+
+- name: Set upgrade_all_packages
+  set_fact:
+    upgrade_all_packages: "{{server_upgrade_all_packages|default('no')}}"
+
+- name: Set project source code path
+  set_fact:
+    repo_sources_path: "{{server_repo_sources_path | mandatory}}"
+
+- name: Set is_pull_request
+  set_fact:
+    is_pull_request: "{{server_is_pull_request | mandatory}}"
+
+- name: Set test_results_dir
+  set_fact:
+    test_results_dir: "{{server_test_results_dir | default(ros_workspace'/test_results') }}"
+
+- name: Set code_coverage_results_dir
+  set_fact:
+    code_coverage_results_dir: "{{server_code_coverage_results_dir | default(ros_workspace'/coverage_results') }}"
+
+- name: Create tests directory
+  file: state=directory path={{test_results_dir}}
+
+- name: Clean tests results directory in case of failure during cache build
+  shell: bash -c "rm -rf {{test_results_dir}}/*"
+
+- name: Create coverage directory
+  file: state=directory path={{code_coverage_results_dir}}
+
+- name: Clean coverage results directory in case of failure during cached build
+  shell: bash -c "rm -rf {{code_coverage_results_dir}}/*"
