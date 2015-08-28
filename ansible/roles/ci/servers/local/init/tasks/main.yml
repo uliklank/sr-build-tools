@@ -6,7 +6,7 @@
   when: local_repo_dir is not defined
 
 - name: Include variables initializator
-  include: roles/ci/servers/common/init/tasks/setup.yml
+  include: /roles/ci/servers/common/init/tasks/setup.yml
   vars:
       server_ros_workspace: "{{ansible_env.HOME}}/workspace"
       server_repo_sources_path: "{{ansible_env.HOME}}/workspace/src/{{local_repo_dir}}"
@@ -15,6 +15,6 @@
       server_code_coverage_results_dir: "{{local_code_coverage_dir}}"
 
 - name: Copy source code from the repository into Docker container
-  include: roles/ci/servers/common/init/tasks/copy_source.yml
+  include: /roles/ci/servers/common/init/tasks/copy_source.yml
   vars:
       server_repo_dir: "{{local_repo_dir}}"
