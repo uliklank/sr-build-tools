@@ -1,7 +1,7 @@
 #
 # ROS Indigo with build tools Dockerfile
 #
-# https://github.com/shadow-robot/sr-build-tools/
+# https://github.com/uliklank/sr-build-tools/
 #
 
 FROM ubuntu:14.04

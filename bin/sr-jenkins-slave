@@ -75,7 +75,7 @@ if [ -d "$build_tools_dir" ]; then
     rm -rf "$build_tools_dir"
 fi
 mkdir -p $(dirname $build_tools_dir)
-git clone https://github.com/shadow-robot/sr-build-tools.git "$build_tools_dir"
+git clone https://github.com/uliklank/sr-build-tools.git "$build_tools_dir"
 echo Installed build tools
 
 # Put the build tools in the path as we call some of them

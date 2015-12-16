@@ -26,7 +26,7 @@ if  [ "circle" != $server_type ] && [ "semaphore_docker" != $server_type ] && [ 
     cd ./ansible
   else
     # No caching
-    git clone https://github.com/shadow-robot/sr-build-tools.git -b "$toolset_branch" $build_tools_folder
+    git clone https://github.com/uliklank/sr-build-tools.git -b "$toolset_branch" $build_tools_folder
     cd $build_tools_folder/ansible
   fi
 fi

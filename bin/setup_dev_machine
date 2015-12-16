@@ -61,7 +61,7 @@ fi
 
 echo "================================================================="
 echo "|       Installing Shadow Robot development environment "
-curl https://raw.githubusercontent.com/shadow-robot/sr-build-tools/master/bin/shadow_hand.txt
+curl https://raw.githubusercontent.com/uliklank/sr-build-tools/master/bin/shadow_hand.txt
 echo "                                                                |"
 echo "================================================================="
 echo ""
@@ -98,9 +98,9 @@ echo ""
 
 if [ -z "${SR_BUILD_TOOLS_BRANCH}" ];
   then
-    git clone https://github.com/shadow-robot/sr-build-tools
+    git clone https://github.com/uliklank/sr-build-tools
   else
-    git clone https://github.com/shadow-robot/sr-build-tools -b ${SR_BUILD_TOOLS_BRANCH}
+    git clone https://github.com/uliklank/sr-build-tools -b ${SR_BUILD_TOOLS_BRANCH}
 fi
 
 
